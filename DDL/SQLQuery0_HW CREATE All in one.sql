@@ -1,19 +1,5 @@
 --SQLQuery00 CREATE DATABASE All in one.sql
 
---SELECT 'SQLQuery4 - CREATE DATABASE All in one'
-----FROM DDL
---GO
---SELECT 'SQLQuery1 - CREATE Students branch'
---GO
---SELECT 'SQLQuery2 - CREATE Teachers and Disciplines'
---GO
---SELECT 'SQLQuery3 - CREATE Schedule and Grades'
---GO
-
-----UNION ALL
-
---------------------------------------
-
 CREATE DATABASE PV_521_ALL_IN_ONE
 ON
 (
@@ -140,7 +126,9 @@ CREATE TABLE Grades
 	CONSTRAINT	FK_Schedule_Students	FOREIGN KEY REFERENCES Students(student_id),
 	lesson		INT			NOT NULL
 	CONSTRAINT	FK_Grades_Schedule		FOREIGN KEY REFERENCES Schedule(lesson_id),
-	grade_1		TINYINT,
-	grade_2		TINYINT,
+	grade_1		TINYINT
+	--CONSTRAINT CK_GRADE_1 CHECK (grade_1>0 AND grade_1 <=12),
+	grade_2		TINYINT
+	--CONSTRAINT CK_GRADE_1 CHECK (grade_2>0 AND grade_2 <=12)
 );
 
