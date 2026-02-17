@@ -1,9 +1,9 @@
--- SQLQueryHW_SELECT Count Group and Students.sql
+п»ї-- SQLQueryHW_SELECT Count Group and Students.sql
 
 SELECT	
-		 direction_name		AS N'Направление обучения'
-		,COUNT(group_id)	AS N'Количество групп'
-		,COUNT(stud_id)		AS N'Количество Студентов'
+		 direction_name		AS N'РќР°РїСЂР°РІР»РµРЅРёРµ РѕР±СѓС‡РµРЅРёСЏ'
+		,COUNT(group_id)	AS N'РљРѕР»РёС‡РµСЃС‚РІРѕ РіСЂСѓРїРї'
+		,COUNT(stud_id)		AS N'РљРѕР»РёС‡РµСЃС‚РІРѕ РЎС‚СѓРґРµРЅС‚РѕРІ'
 
 FROM	Directions, Groups,  Students
 WHERE	direction_id = direction
