@@ -45,17 +45,23 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery2 - SELECT Students.sql</FullPath>
         </FileNode>
-        <FileNode Name="SQLQuery2.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
-          <AssociatedConnUserName />
-          <FullPath>SQLQuery2.sql</FullPath>
-        </FileNode>
         <FileNode Name="SQLQuery3 - SELECT Teachers.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>SQLQuery3 - SELECT Teachers.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery4 - SELECT Aggregate Direction and Groups.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery4 - SELECT Aggregate Direction and Groups.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery4 - SELECT Students And groups.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery4 - SELECT Students And groups.sql</FullPath>
         </FileNode>
         <FileNode Name="SQLQueryHW - Discipline And Teachers .sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
