@@ -1,18 +1,18 @@
--- SQLQueryHW - INSERT 12-21.sql
+ï»¿-- SQLQueryHW - INSERT 12-21.sql
 -----------------------------------------------------------------------------------------------------------------------------------------
 USE PV_521_Import;
 SET DATEFIRST 1;
 -----------------------------------------------------------------------------------------------------------------------------------------
 DECLARE @name_discipline_1		AS	NCHAR(10)	=N'C++';
 DECLARE @start_date_1			AS  DATE		=N'2025-01-27';
-DECLARE @teacher_1				AS	INT		=(SELECT teacher_id			FROM Teachers		WHERE first_name = N'Îëåã');
+DECLARE @teacher_1				AS	INT		=(SELECT teacher_id			FROM Teachers		WHERE first_name = N'ÐžÐ»ÐµÐ³');
 ------->
 DECLARE @name_discipline_2		AS	NCHAR(10)	=N'HardwarePC';
 DECLARE @start_date_2			AS  DATE		=N'2025-02-10';
-DECLARE @teacher_2				AS	INT		=(SELECT teacher_id			FROM Teachers		WHERE last_name = N'Ñâèùåâ');
+DECLARE @teacher_2				AS	INT		=(SELECT teacher_id			FROM Teachers		WHERE last_name = N'Ð¡Ð²Ð¸Ñ‰ÐµÐ²');
 -----------------------------------------------------------------------------------------------------------------------------------------
 DECLARE @group					AS	INT		=(SELECT group_id			FROM Groups			WHERE group_name=N'PV_521');
-DECLARE @discipline_1			AS	INT		=(SELECT discipline_id		FROM Disciplines	WHERE discipline_name LIKE N'%Ïðîöåäóðíîå ïðîãðàììèðîâàíèå íà ÿçûêå C++%');
+DECLARE @discipline_1			AS	INT		=(SELECT discipline_id		FROM Disciplines	WHERE discipline_name LIKE N'%ÐŸÑ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ð½Ð¾Ðµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð½Ð° ÑÐ·Ñ‹ÐºÐµ C++%');
 DECLARE @number_of_lessons_1	AS	TINYINT =(SELECT number_of_lessons	FROM Disciplines	WHERE discipline_id=@discipline_1);
 DECLARE @discipline_2			AS	INT		=(SELECT discipline_id		FROM Disciplines	WHERE discipline_name LIKE N'%Hardware%');
 DECLARE @number_of_lessons_2	AS	TINYINT =(SELECT number_of_lessons	FROM Disciplines	WHERE discipline_id=@discipline_2);
@@ -38,7 +38,7 @@ DECLARE @lesson_number_2	AS TINYINT	= @number_of_lessons_2;
 DECLARE @wednesday_switch	AS BIT		= IIF(@date=@start_date_1,1,0);
 DECLARE @name_discipline	AS NCHAR(10);
 DECLARE @time	AS TIME(0) = @start_time;
-PRINT(FORMATMESSAGE(N'%s %s %s %s, %s',N'Ñòàðò ñ ',CAST(DATEPART(WEEKDAY, @date) AS VARCHAR(24)),N'äíÿ íåäåëè: ', DATENAME(WEEKDAY,@date), CAST(@date AS VARCHAR(24))))
+PRINT(FORMATMESSAGE(N'%s %s %s %s, %s',N'Ð¡Ñ‚Ð°Ñ€Ñ‚ Ñ ',CAST(DATEPART(WEEKDAY, @date) AS VARCHAR(24)),N'Ð´Ð½Ñ Ð½ÐµÐ´ÐµÐ»Ð¸: ', DATENAME(WEEKDAY,@date), CAST(@date AS VARCHAR(24))))
 -----------------------------------------------------------------------------------------------------------------------------------------
 WHILE	(@lesson_number_1 > 0 OR @lesson_number_2 > 0)
 	BEGIN
@@ -61,7 +61,7 @@ WHILE	(@lesson_number_1 > 0 OR @lesson_number_2 > 0)
 						SET @lesson_number_1 = @lesson_number_1 - 1
 					END
 			END
--------> ÄÅÍÜ Ñ++/HardwarePC
+-------> Ð”Ð•ÐÐ¬ Ð¡++/HardwarePC
 		IF(@day = 3)
 			BEGIN
 				--AND 
@@ -102,7 +102,7 @@ WHILE	(@lesson_number_1 > 0 OR @lesson_number_2 > 0)
 					END
 			END
 			--IIF(@lesson_number_1 > 0, SET @lesson_number_1 = @lesson_number_1 - 1 AND SET @lesson = @lesson_number_1, SET @lesson_number_2 = @lesson_number_2 - 1 AND SET @lesson = @lesson_number_2);
--------> ÄÅÍÜ Ñ++
+-------> Ð”Ð•ÐÐ¬ Ð¡++
 		IF(@day = 5)
 			BEGIN
 				IF @lesson_number_1 > 0 AND @start_date_1 <= @date
@@ -129,7 +129,7 @@ WHILE	(@lesson_number_1 > 0 OR @lesson_number_2 > 0)
 		,IIF(@day=3,N'',N'   ')
 		, CAST(@time AS VARCHAR(24))
 		,@name_discipline
-		, CAST(IIF(@name_discipline = @name_discipline_1,N'Îëåã', N'Ñâèùåâ' ) AS VARCHAR(24))));
+		, CAST(IIF(@name_discipline = @name_discipline_1,N'ÐžÐ»ÐµÐ³', N'Ð¡Ð²Ð¸Ñ‰ÐµÐ²' ) AS VARCHAR(24))));
 ------->
 		--IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
 		--INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
@@ -141,7 +141,7 @@ WHILE	(@lesson_number_1 > 0 OR @lesson_number_2 > 0)
 		, DATENAME(WEEKDAY, @date)
 		,IIF(@day=3,N'',N'   ')
 		, CAST(@time AS VARCHAR(24)),@name_discipline
-		, CAST(IIF(@name_discipline = @name_discipline_1,N'Îëåã', N'Ñâèùåâ' ) AS VARCHAR(24))));
+		, CAST(IIF(@name_discipline = @name_discipline_1,N'ÐžÐ»ÐµÐ³', N'Ð¡Ð²Ð¸Ñ‰ÐµÐ²' ) AS VARCHAR(24))));
 ------->
 		--IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
 		--INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
