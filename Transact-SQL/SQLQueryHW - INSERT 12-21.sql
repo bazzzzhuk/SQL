@@ -40,7 +40,7 @@ DECLARE @lesson_number_2	AS TINYINT	= @number_of_lessons_2;
 DECLARE @time				AS TIME(0)	= @start_time;
 DECLARE @wednesday_switch	AS BIT		= IIF(@date=@start_date_1,1,0);
 PRINT(FORMATMESSAGE(N'%s %s %s %s, %s',N'Старт с ',CAST(DATEPART(WEEKDAY, @date) AS VARCHAR(24)),N'дня недели: ', DATENAME(WEEKDAY,@date), CAST(@date AS VARCHAR(24))))
-PRINT(N'---------------------------------------------------------')
+PRINT(N'')
 -----------------------------------------------------------------------------------------------------------------------------------------
 WHILE	(@lesson_number_2 > 0 OR @lesson_number_1 > 0) -- OR!!!
 	BEGIN
@@ -48,39 +48,20 @@ WHILE	(@lesson_number_2 > 0 OR @lesson_number_1 > 0) -- OR!!!
 		DECLARE @day	AS TINYINT	=	DATEPART(WEEKDAY, @date);
 		SET		@time = @start_time;
 -------> День HardwarePC				(Понедельник)
-		IF(@day = 1)
-			BEGIN
-				IF			@lesson_number_2 > 0 AND @start_date_2 <= @date
-					BEGIN
-						SET @lesson = @lesson_number_2
-						SET @discipline = @discipline_2
-						SET @lesson_number_2 = @lesson_number_2 - 1
-					END
-				ELSE 
-					BEGIN
-						SET @lesson = @lesson_number_1;
-						SET @discipline = @discipline_1
-						SET @lesson_number_1 = @lesson_number_1 - 1
-					END
-			END
+		IF(@day = 1) IF @lesson_number_2 > 0 AND @start_date_2 <= @date SET @discipline = @discipline_2 ELSE SET @discipline = @discipline_1
 -------> ДЕНЬ С++/HardwarePC	(Среда)
 		IF(@day = 3)
 			BEGIN
-				--AND 
 				IF @wednesday_switch = 0 
 					BEGIN
 						IF			@lesson_number_2 > 0 AND @start_date_2 <= @date
 							BEGIN
-								SET @lesson = @lesson_number_2
 								SET @discipline = @discipline_2
-								SET @lesson_number_2 = @lesson_number_2 - 1
 								SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)		
 							END
 						ELSE IF		@lesson_number_1 > 0 AND @start_date_1 <= @date
 							BEGIN
-								SET @lesson = @lesson_number_1
 								SET @discipline = @discipline_1
-								SET @lesson_number_1 = @lesson_number_1 - 1
 								SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)
 							END
 					END
@@ -88,36 +69,18 @@ WHILE	(@lesson_number_2 > 0 OR @lesson_number_1 > 0) -- OR!!!
 					BEGIN
 						IF			@lesson_number_1 > 0 AND @start_date_1 <= @date
 							BEGIN
-								SET @lesson = @lesson_number_1
 								SET @discipline = @discipline_1
-								SET @lesson_number_1 = @lesson_number_1 - 1
 								SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)
 							END
 						ELSE IF		@lesson_number_2 > 0 AND @start_date_2 <= @date
 							BEGIN
-								SET @lesson = @lesson_number_2
 								SET @discipline = @discipline_2
-								SET @lesson_number_2 = @lesson_number_2 - 1
 								SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)		
 							END
 					END
 			END
 -------> ДЕНЬ С++				(Пятница)
-		IF(@day = 5)
-			BEGIN
-				IF			@lesson_number_1 > 0 AND @start_date_1 <= @date
-					BEGIN
-						SET @lesson = @lesson_number_1
-						SET @discipline = @discipline_1
-						SET @lesson_number_1 = @lesson_number_1 - 1
-					END
-				ELSE IF		@lesson_number_2 > 0 AND @start_date_2 <= @date
-					BEGIN
-						SET @lesson = @lesson_number_2;
-						SET @discipline = @discipline_2
-						SET @lesson_number_2 = @lesson_number_2 - 1
-					END
-			END
+		IF(@day = 5) IF	@lesson_number_1 > 0 AND @start_date_1 <= @date SET @discipline = @discipline_1 ELSE IF	@lesson_number_2 > 0 AND @start_date_2 <= @date SET @discipline = @discipline_2
 ------->
 SET			@name_discipline = (SELECT discipline_name FROM Disciplines WHERE discipline_id = @discipline);
 SET			@teacher =		IIF(@discipline = @discipline_1, @teacher_1, @teacher_2);
@@ -127,36 +90,38 @@ SET			@teacher_name =	FORMATMESSAGE(N'%s %s %s'
 ,(SELECT	middle_name		FROM Teachers WHERE teacher_id = @teacher));
 -------<
 --> Lesson_1
-		PRINT(FORMATMESSAGE(N'%i,	%s, %s,	%s   %s,	%s,	%s%s'
+IF @discipline = @discipline_1 SET @lesson = @lesson_number_1 ELSE SET @lesson = @lesson_number_2;
+IF @discipline = @discipline_1 SET @lesson_number_1 = @lesson_number_1 - 1 ELSE SET @lesson_number_2 = @lesson_number_2 - 1;
+		PRINT(FORMATMESSAGE(N'%i	│%s│%s%s│%s│%s%s│%s'
 		, @lesson
 		, CAST(@date AS VARCHAR(24))
 		, DATENAME(WEEKDAY, @date)
-		, IIF(@day=3,N'',N'    ')
+		, IIF(@day=3,N'',N'   ')
 		, CAST(@time AS VARCHAR(24))
 		, @name_discipline
-		, IIF(@discipline = @discipline_2, N' 							 	',N'	')
+		, IIF(@discipline = @discipline_2, N'								',N'')
 		, @teacher_name));
 ------->
 		--IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
 		--INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+--> Lesson_2
+SET @time = DATEADD(MINUTE, 95, @start_time);
 IF @discipline = @discipline_1 SET @lesson = @lesson_number_1 ELSE SET @lesson = @lesson_number_2;
 IF @discipline = @discipline_1 SET @lesson_number_1 = @lesson_number_1 - 1 ELSE SET @lesson_number_2 = @lesson_number_2 - 1;
 --PRINT(@lesson);
-SET @time = DATEADD(MINUTE, 95, @start_time);
---> Lesson_2
-		PRINT(FORMATMESSAGE(N'%i,	%s, %s,	%s   %s,	%s,	%s%s'
+		PRINT(FORMATMESSAGE(N'%i	│%s│%s%s│%s│%s%s│%s'
 		, @lesson
 		, CAST(@date AS VARCHAR(24))
 		, DATENAME(WEEKDAY, @date)
-		, IIF(@day=3,N'',N'    ')
+		, IIF(@day=3,N'',N'   ')
 		, CAST(@time AS VARCHAR(24))
 		, @name_discipline
-		, IIF(@discipline = @discipline_2, N' 							 	',N'	')
+		, IIF(@discipline = @discipline_2, N'								',N'')
 		, @teacher_name));
 ------->
 		--IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
 		--INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
 -------<
 		SET @date =	DATEADD(DAY,IIF(@day = 5,3,2),@date);
-		IF(	@day  =	5) PRINT(N'---------------------------------------------------------')
+		IF(	@day  =	5) PRINT(N'►>═─┼──────────┼─────────┼────═►> ☼ <◄═─────────────────────────────────────┼──────────────────────═<◄')
 	END
