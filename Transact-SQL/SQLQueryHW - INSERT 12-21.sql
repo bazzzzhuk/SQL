@@ -102,8 +102,8 @@ IF @discipline = @discipline_1 SET @lesson_number_1 = @lesson_number_1 - 1 ELSE 
 		, IIF(@discipline = @discipline_2, N'								',N'')
 		, @teacher_name));
 ------->
-		--IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
-		--INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+		IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
+		INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
 --> Lesson_2
 SET @time = DATEADD(MINUTE, 95, @start_time);
 IF @discipline = @discipline_1 SET @lesson = @lesson_number_1 ELSE SET @lesson = @lesson_number_2;
@@ -119,8 +119,8 @@ IF @discipline = @discipline_1 SET @lesson_number_1 = @lesson_number_1 - 1 ELSE 
 		, IIF(@discipline = @discipline_2, N'								',N'')
 		, @teacher_name));
 ------->
-		--IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
-		--INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+		IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
+		INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
 -------<
 		SET @date =	DATEADD(DAY,IIF(@day = 5,3,2),@date);
 		IF(	@day  =	5) PRINT(N'►>═─┼──────────┼─────────┼────═►> ☼ <◄═─────────────────────────────────────┼──────────────────────═<◄')
