@@ -3,7 +3,7 @@
 USE PV_521_Import;
 SET DATEFIRST 1;
 -----------------------------------------------------------------------------------------------------------------------------------------
-DECLARE @name_discipline_1		AS	NVARCHAR(150)	= N'%Процедурное%';
+DECLARE @name_discipline_1		AS	NVARCHAR(150)	=N'%Процедурное%';
 DECLARE @start_date_1			AS  DATE			=N'2025-01-27';
 DECLARE @teacher_1				AS	SMALLINT		=(SELECT teacher_id			FROM Teachers		WHERE first_name = N'Олег');
 ------->
