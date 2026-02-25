@@ -69,9 +69,9 @@ WHILE	(@lesson_number_2 > 0 OR @lesson_number_1 > 0) -- OR!!!
 		SET			@name_discipline = (SELECT discipline_name FROM Disciplines WHERE discipline_id = @discipline);
 		SET			@teacher =		IIF(@discipline = @discipline_1, @teacher_1, @teacher_2);
 		SET			@teacher_name =	FORMATMESSAGE(N'%s %s %s'
-,(SELECT	last_name		FROM Teachers WHERE teacher_id = @teacher)
-,(SELECT	first_name		FROM Teachers WHERE teacher_id = @teacher)
-,(SELECT	middle_name		FROM Teachers WHERE teacher_id = @teacher));
+			,(SELECT	last_name		FROM Teachers WHERE teacher_id = @teacher)
+			,(SELECT	first_name		FROM Teachers WHERE teacher_id = @teacher)
+			,(SELECT	middle_name		FROM Teachers WHERE teacher_id = @teacher));
 --> Lesson_1
 		IF		@discipline = @discipline_1				BEGIN	
 			SET @lesson		= @lesson_number_1 

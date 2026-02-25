@@ -1,6 +1,7 @@
 -- SQLQuery1 - SELECT Schedule.sql
 
 USE PV_521_Import
+SET DATEFIRST 1;
 
 --DELETE FROM Schedule WHERE [group]=(SELECT group_id FROM Groups WHERE group_name= N'PV_521');
 
@@ -18,4 +19,5 @@ WHERE		[group]			=		group_id
 AND			discipline		=		discipline_id
 AND			teacher			=		teacher_id
 AND			[group]			=		(SELECT group_id FROM Groups WHERE group_name = N'PV_521')
+ORDER BY date
 ;
