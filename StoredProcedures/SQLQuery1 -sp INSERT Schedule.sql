@@ -11,15 +11,9 @@ ALTER PROCEDURE sp_InsertScheduleStacionar
 AS
 BEGIN
 	DECLARE @group				AS INT		=	(SELECT group_id			FROM Groups			WHERE group_name		LIKE @group_name);
-PRINT(@group);
 	DECLARE @teacher			AS SMALLINT	=	(SELECT	teacher_id			FROM Teachers		WHERE first_name		LIKE @teacher_first_name);
-PRINT(@teacher);
 	DECLARE @discipline			AS SMALLINT	=	(SELECT discipline_id		FROM Disciplines	WHERE discipline_name	LIKE @discipline_name);
-PRINT(@discipline);
 	DECLARE @number_of_lessons	AS TINYINT	=	(SELECT number_of_lessons	FROM Disciplines	WHERE discipline_name	LIKE @discipline_name);
-PRINT(@number_of_lessons);
---	DECLARE @lesson_number		AS TINYINT	=	0;
---	DECLARE @date				AS DATE		=	@start_date;
 	DECLARE @start_time			AS TIME		=	(SELECT start_time FROM GROUPS WHERE group_id=@group);
 
 PRINT(@start_date);
@@ -32,14 +26,12 @@ WHILE	@lesson_number < @number_of_lessons
 	BEGIN
 		SET @time=@start_time;
 		PRINT(FORMATMESSAGE(N'%i, %s, %s,    %s', @lesson_number, CAST(@date AS VARCHAR(24)), DATENAME(WEEKDAY, @date), CAST(@time AS VARCHAR(24)) ));
-		IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
-		INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+		EXEC sp_InsertLesson @group, @discipline, @teacher, @date, @time;
 		SET @lesson_number = @lesson_number + 1;
 		SET @time = DATEADD(MINUTE, 95, @start_time);
 -- lesson 2
 		PRINT(FORMATMESSAGE(N'%i, %s, %s,    %s', @lesson_number, CAST(@date AS VARCHAR(24)), DATENAME(WEEKDAY, @date), CAST(@time AS VARCHAR(24)) ));
-		IF NOT EXISTS (SELECT lesson_id FROM Schedule WHERE [date]=@date AND [time]=@time AND [group]=@group)
-		INSERT Schedule VALUES (@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+		EXEC sp_InsertLesson @group, @discipline, @teacher, @date, @time;
 		SET @lesson_number = @lesson_number + 1;
 
 		DECLARE @day	AS TINYINT		=	DATEPART(WEEKDAY, @date); -- как раз для этого написано
