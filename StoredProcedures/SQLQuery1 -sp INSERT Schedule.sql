@@ -20,19 +20,14 @@ PRINT(@start_date);
 PRINT(@start_time);
 
 DECLARE @date			AS DATE		= @start_date;
-DECLARE @lesson_number	AS TINYINT	= 1;
+DECLARE @lesson_number	AS TINYINT	= dbo.CountLessons(@group, @discipline);
 DECLARE @time	AS TIME(0) = @start_time;
 WHILE	@lesson_number < @number_of_lessons
 	BEGIN
 		SET @time=@start_time;
-		PRINT(FORMATMESSAGE(N'%i, %s, %s,    %s', @lesson_number, CAST(@date AS VARCHAR(24)), DATENAME(WEEKDAY, @date), CAST(@time AS VARCHAR(24)) ));
-		EXEC sp_InsertLesson @group, @discipline, @teacher, @date, @time;
-		SET @lesson_number = @lesson_number + 1;
-		SET @time = DATEADD(MINUTE, 95, @start_time);
--- lesson 2
-		PRINT(FORMATMESSAGE(N'%i, %s, %s,    %s', @lesson_number, CAST(@date AS VARCHAR(24)), DATENAME(WEEKDAY, @date), CAST(@time AS VARCHAR(24)) ));
-		EXEC sp_InsertLesson @group, @discipline, @teacher, @date, @time;
-		SET @lesson_number = @lesson_number + 1;
+
+		EXEC sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
+		EXEC sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
 
 		DECLARE @day	AS TINYINT		=	DATEPART(WEEKDAY, @date); -- как раз для этого написано
 		SET @date						=	DATEADD(DAY,IIF(@day = 5,3,2),@date);
