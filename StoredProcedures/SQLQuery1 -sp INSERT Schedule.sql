@@ -25,10 +25,10 @@ DECLARE @time	AS TIME(0) = @start_time;
 WHILE	@lesson_number < @number_of_lessons
 	BEGIN
 		SET		@time	=	@start_time;
-		SET		@date	=	dbo.CheckLearningDay(@date);
+		--SET		@date	=	dbo.CheckLearningDay(@date, @group_name);
 		EXEC	sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
 		EXEC	sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
-		SET		@date	=	dbo.GetNextLearningDate(@date);
+		SET		@date	=	dbo.GetNextLearningDate(@date, @group_name);
 
 		--DECLARE @day	AS TINYINT		=	DATEPART(WEEKDAY, @date); -- как раз для этого написано
 		--SET @date						=	DATEADD(DAY,IIF(@day = 5,3,2),@date);

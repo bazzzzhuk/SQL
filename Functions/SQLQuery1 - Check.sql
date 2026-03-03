@@ -5,4 +5,4 @@ SET DATEFIRST 1;
 GO
 
 
-PRINT dbo.GetNextLearnDay(N'PV_521')
+PRINT dbo.GetNextLearnDay(N'Java_326')
