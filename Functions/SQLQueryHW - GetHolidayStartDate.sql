@@ -1,4 +1,4 @@
---SQLQueryHW - GetHolidayStartDate.sql
+п»ї--SQLQueryHW - GetHolidayStartDate.sql
 USE PV_521_Import;
 SET DATEFIRST 1;
 GO
@@ -8,28 +8,28 @@ AS
 BEGIN
 	DECLARE @holy_name	AS	NVARCHAR(150)	=	(SELECT holiday_name FROM Holidays)
 	DECLARE @date_holiday	AS	DATE	=	DATEFROMPARTS(@year
-		,(CASE @holy_name	WHEN 'Новогодние каникулы'		THEN 01
-							WHEN '23 Февраля'				THEN 02
-							WHEN '8 Марта'					THEN 03
-							WHEN 'Пасха'					THEN 04
-							WHEN 'Майские каникулы'			THEN 05
-							WHEN 'День народного единства'	THEN 11
+		,(CASE @holy_name	WHEN 'РќРѕРІРѕРіРѕРґРЅРёРµ РєР°РЅРёРєСѓР»С‹'		THEN 01
+							WHEN '23 Р¤РµРІСЂР°Р»СЏ'				THEN 02
+							WHEN '8 РњР°СЂС‚Р°'					THEN 03
+							WHEN 'РџР°СЃС…Р°'					THEN 04
+							WHEN 'РњР°Р№СЃРєРёРµ РєР°РЅРёРєСѓР»С‹'			THEN 05
+							WHEN 'Р”РµРЅСЊ РЅР°СЂРѕРґРЅРѕРіРѕ РµРґРёРЅСЃС‚РІР°'	THEN 11
 							ELSE 0 END)
-		,(CASE @holy_name	WHEN 'Новогодние каникулы'		THEN 01
-							WHEN '23 Февраля'				THEN 23
-							WHEN '8 Марта'					THEN 08
-							WHEN 'Пасха'					THEN 12
-							WHEN 'Майские каникулы'			THEN 01
-							WHEN 'День народного единства'	THEN 04
+		,(CASE @holy_name	WHEN 'РќРѕРІРѕРіРѕРґРЅРёРµ РєР°РЅРёРєСѓР»С‹'		THEN 01
+							WHEN '23 Р¤РµРІСЂР°Р»СЏ'				THEN 23
+							WHEN '8 РњР°СЂС‚Р°'					THEN 08
+							WHEN 'РџР°СЃС…Р°'					THEN 12
+							WHEN 'РњР°Р№СЃРєРёРµ РєР°РЅРёРєСѓР»С‹'			THEN 01
+							WHEN 'Р”РµРЅСЊ РЅР°СЂРѕРґРЅРѕРіРѕ РµРґРёРЅСЃС‚РІР°'	THEN 04
 							ELSE 0 END));
 	DECLARE @weekday		AS	TINYINT	=	DATEPART(WEEKDAY, @date_holiday);
 	DECLARE @start_date		AS	DATE	=	DATEADD(DAY
-		,(CASE @holy_name	WHEN 'Новогодние каникулы' THEN 1
-							WHEN '23 Февраля' THEN 0
-							WHEN '8 Марта' THEN 0
-							WHEN 'Пасха' THEN 49
-							WHEN 'Майские каникулы' THEN 0
-							WHEN 'День народного единства' THEN 0
+		,(CASE @holy_name	WHEN 'РќРѕРІРѕРіРѕРґРЅРёРµ РєР°РЅРёРєСѓР»С‹' THEN 1
+							WHEN '23 Р¤РµРІСЂР°Р»СЏ' THEN 0
+							WHEN '8 РњР°СЂС‚Р°' THEN 0
+							WHEN 'РџР°СЃС…Р°' THEN 49
+							WHEN 'РњР°Р№СЃРєРёРµ РєР°РЅРёРєСѓР»С‹' THEN 0
+							WHEN 'Р”РµРЅСЊ РЅР°СЂРѕРґРЅРѕРіРѕ РµРґРёРЅСЃС‚РІР°' THEN 0
 							ELSE 0 END)-@weekday
 	,@date_holiday);
 	IF @weekday = 7 SET @start_date = DATEADD(DAY, -1, @date_holiday);
