@@ -1,4 +1,4 @@
---SQLQuery7 - GetNewYearHolidaysStartDate.sql
+﻿--SQLQuery7 - GetNewYearHolidaysStartDate.sql
 
 USE PV_521_Import;
 SET DATEFIRST 1;

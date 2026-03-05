@@ -45,11 +45,17 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery1 -sp INSERT Schedule.sql</FullPath>
         </FileNode>
-        <FileNode Name="SQLQueryHW - sp_INSERTHolidays.sql">
+        <FileNode Name="SQLQueryHW - sp_INSERT Holiday for year.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>SQLQueryHW - sp_INSERTHolidays.sql</FullPath>
+          <FullPath>SQLQueryHW - sp_INSERT Holiday for year.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQueryHW - sp_INSERTHoliday.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQueryHW - sp_INSERTHoliday.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
