@@ -2,7 +2,6 @@
 USE PV_521_Import;
 SET DATEFIRST 1;
 GO
-
 CREATE OR ALTER PROCEDURE sp_InsertHoliday
 				@holiday_year	AS SMALLINT,
 				@holiday_name	AS NVARCHAR(150)
