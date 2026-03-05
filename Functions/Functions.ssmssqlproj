@@ -21,6 +21,12 @@
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
+        <FileNode Name="SQLQuery0 - Holiday CHECK.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery0 - Holiday CHECK.sql</FullPath>
+        </FileNode>
         <FileNode Name="SQLQuery1 - Check.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
@@ -45,11 +51,23 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery1 - GetNextLearnDay.sql</FullPath>
         </FileNode>
+        <FileNode Name="SQLQuery7 - GetNewYearHolidaysStartDate.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery7 - GetNewYearHolidaysStartDate.sql</FullPath>
+        </FileNode>
         <FileNode Name="SQLQueryHW - checkDay.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>SQLQueryHW - checkDay.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQueryHW - GetHolidayStartDate.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQueryHW - GetHolidayStartDate.sql</FullPath>
         </FileNode>
         <FileNode Name="SQLQueryHW - nextDATE.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
