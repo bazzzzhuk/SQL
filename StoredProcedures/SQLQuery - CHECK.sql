@@ -11,9 +11,11 @@ SET DATEFIRST 1;
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%Hardware-PC%')
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%Теория баз данных, программирование MS SQL Server%')
 
+--DELETE FROM Schedule WHERE [group] = 521
+
 --EXEC sp_InsertScheduleStacionar N'PV_521', N'%ADO.NET%', N'Олег', N'2025-01-01';
 --EXEC sp_InsertScheduleStacionar N'PV_521', N'%Объектно%', N'Олег', N'2025-02-13';
---EXEC sp_SelectScheduleFor		N'PV_521';
+EXEC sp_SelectScheduleFor		N'PV_521';
 
 --EXEC sp_InsertScheduleStacionar N'PV_319', N'%ADO.NET%', N'Олег', N'2027-01-01';
 --EXEC sp_InsertScheduleStacionar N'Java_326', N'%ADO.NET%', N'Олег', N'2024-12-20';

@@ -17,13 +17,13 @@ GO
 --PRINT dbo.GetSummertimeSadness(2025);
 --PRINT dbo.GetEasterDate(1977);
 
---EXEC sp_InsertAllHolidaysFor 2026;
+--EXEC sp_InsertAllHolidaysFor 2027;
 
-SELECT 
-	[Date] = date,
-	[Holidays]=	holiday_name
-FROM DaysOFF, Holidays
-WHERE holiday = holiday_id
-AND date >= DATEFROMPARTS(2025,12,20)
-;
+--SELECT 
+--	[Date] = date,
+--	[Holidays]=	holiday_name
+--FROM DaysOFF, Holidays
+--WHERE holiday = holiday_id
+--AND date >= DATEFROMPARTS(2026,12,20)
+--;
 
