@@ -29,10 +29,10 @@ CREATE OR ALTER PROCEDURE sp_InsertSchedule1221
 AS
 BEGIN
 	DECLARE @group				AS INT			 =	(SELECT group_id			FROM Groups		 WHERE group_name = @group_name);
-	DECLARE @discipline			AS SMALLINT		 =	(SELECT discipline_id		FROM Disciplines WHERE discipline_name LIKE @discipline_name);
-	DECLARE @number_of_lessons	AS TINYINT		 =	(SELECT	number_of_lessons	FROM Disciplines WHERE discipline_name LIKE @discipline_name);
-	DECLARE @lesson_number		AS TINYINT		 =	(SELECT COUNT(lesson_id) FROM Schedule WHERE discipline=@discipline AND [group] = @group);
-	DECLARE	@teacher			AS SMALLINT		 =	(SELECT teacher_id			FROM Teachers	 WHERE last_name LIKE @teacher_name OR first_name LIKE @teacher_name);
+	DECLARE @discipline			AS SMALLINT		 =	(SELECT discipline_id		FROM Disciplines WHERE discipline_name	LIKE @discipline_name);
+	DECLARE @number_of_lessons	AS TINYINT		 =	(SELECT	number_of_lessons	FROM Disciplines WHERE discipline_name	LIKE @discipline_name);
+	DECLARE @lesson_number		AS TINYINT		 =	(SELECT COUNT(lesson_id)	FROM Schedule	 WHERE discipline=@discipline AND [group] = @group);
+	DECLARE	@teacher			AS SMALLINT		 =	(SELECT teacher_id			FROM Teachers	 WHERE last_name		LIKE @teacher_name	OR first_name LIKE @teacher_name);
 	--DECLARE @start_date			AS DATE			 =	(SELECT MAX([date])			FROM Schedule	 WHERE [group]=@group);
 	IF		@start_date IS NULL SET @start_date  =	(SELECT [start_date]		FROM Groups		 WHERE group_id = @group);
 	DECLARE @start_time			AS TIME			 =	(SELECT start_time			FROM Groups		 WHERE group_id = @group);
