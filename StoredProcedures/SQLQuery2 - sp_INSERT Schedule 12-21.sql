@@ -46,14 +46,14 @@ BEGIN
 		EXEC	sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
 		--IF DATEPART(WEEKDAY, @date) = @constant_day	SET @date = DATEADD(DAY, 7, @date);
 		SET		@date = dbo.GetNextLearnDate(@group_name, @date);
-		WHILE		DATEPART(WEEKDAY, @date)	=	@denied_day
+		WHILE DATEPART(WEEKDAY, @date) <> @constant_day
+		BEGIN
+			IF		DATEPART(WEEKDAY, @date)	=	@denied_day SET		@date = dbo.GetNextLearnDate(@group_name, @date);
+			IF		DATEPART(WEEKDAY, @date)	=	@alternate_day
 			BEGIN
-				PRINT	@date;
-				SET		@date = dbo.GetNextLearnDate(@group_name, @date);
-				IF		DATEPART(WEEKDAY, @date)	=	@alternate_day	
-					AND	EXISTS	(SELECT lesson_id FROM Schedule WHERE [date] = DATEADD(DAY, -7 ,@date)
-					AND discipline = @discipline) 
-					SET @date = dbo.GetNextLearnDate(@group_name, @date);
+				IF NOT EXISTS	(SELECT lesson_id FROM Schedule WHERE [date] = DATEADD(DAY, -7 ,@date) AND @discipline = discipline) BREAK;
+				ELSE SET		@date = dbo.GetNextLearnDate(@group_name, @date);
 			END
+		END
 	END
 END

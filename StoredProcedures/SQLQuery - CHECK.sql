@@ -11,10 +11,13 @@ SET DATEFIRST 1;
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%Hardware-PC%')
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%Теория баз данных, программирование MS SQL Server%')
 
---DELETE FROM Schedule WHERE [group] = 521 --AND [date]>=N'2026-03-07'
+DELETE FROM Schedule WHERE [group] = 521 --AND [date]>=N'2026-03-07'
 EXEC sp_InsertSchedule1221 N'PV_521', N'Hardware%', N'Свищев',N'2025-01-20',1,3,5;
---EXEC sp_InsertSchedule1221 N'PV_521', N'%Windows', N'Свищев',N'2025-04-30',1,3,5;
---EXEC sp_InsertSchedule1221 N'PV_521', N'Процедурное%C++', N'Ковтун',N'2025-01-20',5,3,1;
+DECLARE @bb AS BIT;
+IF EXISTS (SELECT lesson_id FROM Schedule WHERE [date] = N'2025-01-22' AND discipline = 31) SET @bb = 1 ELSE SET @bb = 0;
+PRINT @bb;
+EXEC sp_InsertSchedule1221 N'PV_521', N'%Windows', N'Свищев',N'2025-04-30',1,3,5;
+EXEC sp_InsertSchedule1221 N'PV_521', N'Процедурное%C++', N'Ковтун',N'2025-01-20',5,3,1;
 --UPDATE Schedule SET teacher = 1 WHERE discipline =1;
 
 --EXEC sp_InsertScheduleStacionar N'PV_521', N'%Объектно%', N'Олег', N'2025-02-13';
