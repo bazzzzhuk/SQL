@@ -25,7 +25,8 @@ CREATE OR ALTER PROCEDURE sp_InsertSchedule1221
 	,@start_date				AS DATE
 	,@constant_day				AS TINYINT
 	,@alternate_day				AS TINYINT
-	,@denied_day				AS TINYINT
+	,@denied_day				AS TINYINT -- +
+	--,@first_week_present		AS BIT -- +
 AS
 BEGIN
 	DECLARE @group				AS INT			 =	(SELECT group_id			FROM Groups		 WHERE group_name = @group_name);
@@ -39,12 +40,17 @@ BEGIN
 	DECLARE @date				AS DATE			 =	@start_date;
 	DECLARE @time				AS TIME			 =	@start_time;
 
+	DECLARE @previous_week_present  AS BIT = 0;
+	--DECLARE @previous_week_present  AS BIT = IIF(@first_week_present=1,0,1);
+
+
 	WHILE @lesson_number < @number_of_lessons
 	BEGIN
+	--IF DATEPART(WEEKDAY, @date) = @constant_day OR (DATEPART(WEEKDAY, @date) = @alternate_day AND @previous_week_present = 0) --+
+	--BEGIN --+
 		SET		@time = @start_time;
 		EXEC	sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
 		EXEC	sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
-		--IF DATEPART(WEEKDAY, @date) = @constant_day	SET @date = DATEADD(DAY, 7, @date);
 		SET		@date = dbo.GetNextLearnDate(@group_name, @date);
 		WHILE DATEPART(WEEKDAY, @date) <> @constant_day
 		BEGIN
@@ -56,4 +62,7 @@ BEGIN
 			END
 		END
 	END
+	--IF DATEPART(WEEKDAY, @date) = @alternate_day --+
+	--	SET @previous_week_present = IIF(@previous_week_present =1,0,1); --+
+	-- SET		@date = dbo.GetNextLearnDate(@group_name, @date); --+
 END
