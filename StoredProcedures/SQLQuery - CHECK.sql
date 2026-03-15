@@ -3,6 +3,8 @@
 USE PV_521_Import
 SET DATEFIRST 1;
 
+DELETE FROM DaysOffTeachers WHERE [teacherOFF] = 1 --AND [date]>=N'2026-03-07'
+
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%ADO.NET%')
 
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%Сетевое программирование%')
@@ -11,7 +13,7 @@ SET DATEFIRST 1;
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%Hardware-PC%')
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%Теория баз данных, программирование MS SQL Server%')
 
-DELETE FROM Schedule WHERE [group] = 521 --AND [date]>=N'2026-03-07'
+--DELETE FROM Schedule WHERE [group] = 521 --AND [date]>=N'2026-03-07'
 --EXEC sp_InsertSchedule1221 N'PV_521', N'Hardware%', N'Свищев',N'2025-01-20',1,3,5;
 --DECLARE @bb AS BIT;
 --IF EXISTS (SELECT lesson_id FROM Schedule WHERE [date] = N'2025-01-22' AND discipline = 31) SET @bb = 1 ELSE SET @bb = 0;
@@ -37,6 +39,6 @@ DELETE FROM Schedule WHERE [group] = 521 --AND [date]>=N'2026-03-07'
 --EXEC sp_SelectScheduleFor		N'PV_319';
 --EXEC sp_SelectScheduleFor		N'Java_326';
 
-EXEC sp_1221_InsertSchedule N'PV_521', N'%ADO.NET%', N'Олег', N'2025-02-03', N'%Hardware-PC%', N'Свищев', N'2025-02-14';
+--EXEC sp_1221_InsertSchedule N'PV_521', N'%ADO.NET%', N'Олег', N'2025-02-03', N'%Hardware-PC%', N'Свищев', N'2025-02-07';
 
 EXEC sp_SelectScheduleFor		N'PV_521';

@@ -63,6 +63,12 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery5 - CREATE EXAM.sql</FullPath>
         </FileNode>
+        <FileNode Name="SQLQueryHW - CREATE Teachers_TimeOFF.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQueryHW - CREATE Teachers_TimeOFF.sql</FullPath>
+        </FileNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">

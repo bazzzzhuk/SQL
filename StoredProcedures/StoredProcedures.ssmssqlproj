@@ -63,6 +63,12 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery7 - sp_InsertHolidaysFor.sql</FullPath>
         </FileNode>
+        <FileNode Name="SQLQueryHW - CHECK sp_InsertTeachersOFF.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQueryHW - CHECK sp_InsertTeachersOFF.sql</FullPath>
+        </FileNode>
         <FileNode Name="SQLQueryHW - sp_1221_InsertSchedule.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
@@ -80,6 +86,12 @@
           <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>SQLQueryHW - sp_INSERTHoliday.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQueryHW - sp_InsertTeachersOFF.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FLTOGEC\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FLTOGEC\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQueryHW - sp_InsertTeachersOFF.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>

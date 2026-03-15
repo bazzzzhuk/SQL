@@ -39,24 +39,22 @@ BEGIN
 		IF(@day = 1) IF @lesson_number_2 < @number_of_lessons_2 AND @start_date_2 <= @date SET @discipline = @discipline_2 ELSE SET @discipline = @discipline_1
 		---> Среда
 		IF(@day = 3)																BEGIN
-			IF		@wednesday_switch = 0											BEGIN
+			IF					@wednesday_switch = 0								BEGIN
 					IF			@lesson_number_2 < @number_of_lessons_2 
 							AND @start_date_2 <= @date								BEGIN
-							SET @discipline = @discipline_2
-							SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)	END
+							SET @discipline = @discipline_2							END
 					ELSE IF		@lesson_number_1 < @number_of_lessons_1 
 							AND @start_date_1 <= @date								BEGIN
-							SET @discipline = @discipline_1
-							SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)	END END
-			ELSE IF @wednesday_switch = 1											BEGIN
+							SET @discipline = @discipline_1							END END
+			ELSE IF				@wednesday_switch = 1								BEGIN
 					IF			@lesson_number_1 < @number_of_lessons_1 
 								AND @start_date_1 <= @date							BEGIN
-							SET @discipline = @discipline_1
-							SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)	END
+							SET @discipline = @discipline_1							END
 					ELSE IF		@lesson_number_2 < @number_of_lessons_2 
 							AND @start_date_2 <= @date								BEGIN
-							SET @discipline = @discipline_2
-							SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)	END END END
+							SET @discipline = @discipline_2							END END 
+							SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)	END
+		--SET @discipline = IIF((@lesson_number_2 < @number_of_lessons_2 AND @start_date_2 <= @date),@discipline_2,@discipline_1)
 		---> Пятница
 		IF(@day = 5) IF	@lesson_number_1 < @number_of_lessons_1 AND @start_date_1 <= @date SET @discipline = @discipline_1 ELSE IF	@lesson_number_2 < @number_of_lessons_2 AND @start_date_2 <= @date SET @discipline = @discipline_2
 --->
