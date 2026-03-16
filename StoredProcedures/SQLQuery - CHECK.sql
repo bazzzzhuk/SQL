@@ -3,7 +3,7 @@
 USE PV_521_Import
 SET DATEFIRST 1;
 
-DELETE FROM DaysOffTeachers WHERE [teacherOFF] = 1 --AND [date]>=N'2026-03-07'
+--DELETE FROM DaysOffTeachers WHERE [teacherOFF] = 1;
 
 --DELETE FROM Schedule WHERE discipline=(SELECT discipline_id FROM Disciplines	WHERE discipline_name LIKE N'%ADO.NET%')
 
