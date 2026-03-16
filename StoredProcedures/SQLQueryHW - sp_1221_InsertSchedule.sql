@@ -26,9 +26,9 @@ BEGIN
 	DECLARE @teacher				AS SMALLINT;
 	DECLARE @discipline				AS SMALLINT;
 	DECLARE	@lesson_number			AS TINYINT;
-	DECLARE @lesson_number_1		AS TINYINT		 = 0;
-	DECLARE @lesson_number_2		AS TINYINT		 = 0;
-	DECLARE @time					AS TIME(0)		 = @start_time;
+	DECLARE @lesson_number_1		AS TINYINT		 = (SELECT COUNT(lesson_id)	FROM Schedule	 WHERE discipline=@discipline_1 AND [group] = @group);
+	DECLARE @lesson_number_2		AS TINYINT		 = (SELECT COUNT(lesson_id)	FROM Schedule	 WHERE discipline=@discipline_2 AND [group] = @group);
+	DECLARE @time					AS TIME			 = @start_time;
 	DECLARE @wednesday_switch		AS BIT			 = IIF(@date=@start_date_1,1,0);
 --->
 	WHILE	(@lesson_number_1 < @number_of_lessons_1 OR @lesson_number_2 < @number_of_lessons_2) -- OR!!!

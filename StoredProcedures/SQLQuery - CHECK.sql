@@ -39,6 +39,6 @@ SET DATEFIRST 1;
 --EXEC sp_SelectScheduleFor		N'PV_319';
 --EXEC sp_SelectScheduleFor		N'Java_326';
 
---EXEC sp_1221_InsertSchedule N'PV_521', N'%ADO.NET%', N'Олег', N'2025-02-03', N'%Hardware-PC%', N'Свищев', N'2025-02-07';
+EXEC sp_1221_InsertSchedule N'PV_521', N'%ADO.NET%', N'Олег', N'2025-02-03', N'%Hardware-PC%', N'Свищев', N'2025-02-07';
 
 EXEC sp_SelectScheduleFor		N'PV_521';
