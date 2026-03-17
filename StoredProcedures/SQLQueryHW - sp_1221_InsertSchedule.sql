@@ -36,27 +36,56 @@ BEGIN
 		DECLARE @day				AS TINYINT		 = DATEPART(WEEKDAY, @date);
 		SET		@time = @start_time;
 		---> Понедельник
-		IF(@day = 1) IF @lesson_number_2 < @number_of_lessons_2 AND @start_date_2 <= @date SET @discipline = @discipline_2 ELSE SET @discipline = @discipline_1
+		IF(@day = 1)																BEGIN
+			IF					(@lesson_number_2 < @number_of_lessons_2 
+							AND @start_date_2 <= @date 
+							AND dbo.CheckBusyTeacher (@teacher_2, @date) = 0)		BEGIN
+							SET @discipline = @discipline_2							END
+			ELSE IF				(@lesson_number_1 < @number_of_lessons_1 
+							AND @start_date_1 <= @date
+							AND dbo.CheckBusyTeacher (@teacher_1, @date) = 0)		BEGIN
+							SET @discipline = @discipline_1							END 
+			ELSE  BEGIN SET		@date = dbo.GetNextLearnDate(@group_name, @date);
+								CONTINUE											END END
 		---> Среда
 		IF(@day = 3)																BEGIN
 			IF					@wednesday_switch = 0								BEGIN
-					IF			@lesson_number_2 < @number_of_lessons_2 
-							AND @start_date_2 <= @date								BEGIN
+					IF			(@lesson_number_2 < @number_of_lessons_2 
+							AND @start_date_2 <= @date								
+							AND dbo.CheckBusyTeacher (@teacher_2, @date) = 0)		BEGIN
 							SET @discipline = @discipline_2							END
-					ELSE IF		@lesson_number_1 < @number_of_lessons_1 
-							AND @start_date_1 <= @date								BEGIN
-							SET @discipline = @discipline_1							END END
+					ELSE IF		(@lesson_number_1 < @number_of_lessons_1 
+							AND @start_date_1 <= @date
+							AND dbo.CheckBusyTeacher (@teacher_1, @date) = 0)		BEGIN
+							SET @discipline = @discipline_1							END 
+					ELSE  BEGIN SET		@date = dbo.GetNextLearnDate(@group_name, @date);
+								CONTINUE											END END
 			ELSE IF				@wednesday_switch = 1								BEGIN
-					IF			@lesson_number_1 < @number_of_lessons_1 
-								AND @start_date_1 <= @date							BEGIN
+					IF			(@lesson_number_1 < @number_of_lessons_1 
+								AND @start_date_1 <= @date
+								AND dbo.CheckBusyTeacher (@teacher_1, @date) = 0)	BEGIN
 							SET @discipline = @discipline_1							END
-					ELSE IF		@lesson_number_2 < @number_of_lessons_2 
-							AND @start_date_2 <= @date								BEGIN
-							SET @discipline = @discipline_2							END END 
+					ELSE IF		(@lesson_number_2 < @number_of_lessons_2 
+							AND @start_date_2 <= @date
+							AND dbo.CheckBusyTeacher (@teacher_2, @date) = 0)		BEGIN
+							SET @discipline = @discipline_2							END 
+					ELSE  BEGIN SET		@date = dbo.GetNextLearnDate(@group_name, @date);
+								CONTINUE											END END
+			ELSE			BREAK;
 							SET @wednesday_switch = IIF(@wednesday_switch=0,1,0)	END
 		--SET @discipline = IIF((@lesson_number_2 < @number_of_lessons_2 AND @start_date_2 <= @date),@discipline_2,@discipline_1)
 		---> Пятница
-		IF(@day = 5) IF	@lesson_number_1 < @number_of_lessons_1 AND @start_date_1 <= @date SET @discipline = @discipline_1 ELSE IF	@lesson_number_2 < @number_of_lessons_2 AND @start_date_2 <= @date SET @discipline = @discipline_2
+		IF(@day = 5)																BEGIN
+			IF					(@lesson_number_1 < @number_of_lessons_1 
+							AND @start_date_1 <= @date 
+							AND dbo.CheckBusyTeacher (@teacher_1, @date) = 0)		BEGIN
+							SET @discipline = @discipline_1							END
+			ELSE IF				(@lesson_number_2 < @number_of_lessons_2 
+							AND @start_date_2 <= @date
+							AND dbo.CheckBusyTeacher (@teacher_2, @date) = 0)		BEGIN
+							SET @discipline = @discipline_2							END
+			ELSE  BEGIN SET		@date = dbo.GetNextLearnDate(@group_name, @date);
+								CONTINUE											END END
 --->
 		SET		@teacher		= IIF(@discipline = @discipline_1, @teacher_1, @teacher_2);
 		SET		@lesson_number  = IIF(@discipline = @discipline_1, @lesson_number_1, @lesson_number_2);

@@ -1,4 +1,4 @@
-﻿-- SQLQuery1 -sp INSERT Schedule.sql
+﻿-- SQLQuery1 -sp INSERT ScheduleStacionar.sql
 USE PV_521_Import;
 SET DATEFIRST 1;
 GO -- Кнопка применить
@@ -25,14 +25,9 @@ DECLARE @lesson_number	AS TINYINT	= dbo.CountLessons(@group, @discipline);
 DECLARE @time	AS TIME(0) = @start_time;
 WHILE	@lesson_number < @number_of_lessons
 	BEGIN
-		SET		@date	=	dbo.GetNextLearnDate(@group_name, @date);
-		SET		@time	=	@start_time;
-		--SET		@date	=	dbo.CheckLearningDay(@date, @group_name);
-		EXEC	sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
-		EXEC	sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
-		--SET		@date	=	dbo.GetNextLearningDate(@date, @group_name); --my
-
-		--DECLARE @day	AS TINYINT		=	DATEPART(WEEKDAY, @date); -- как раз для этого написано
-		--SET @date						=	DATEADD(DAY,IIF(@day = 5,3,2),@date);
+		WHILE dbo.CheckBusyTeacher(@teacher, @date)=1 SET	@date	=	dbo.GetNextLearnDate(@group_name, @date);
+		SET			@time	=	@start_time;
+		EXEC		sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
+		EXEC		sp_InsertLesson @group, @discipline, @teacher, @date, @time OUTPUT, @lesson_number OUTPUT;
 	END
 END
